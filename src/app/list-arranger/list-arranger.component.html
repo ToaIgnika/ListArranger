@@ -1,0 +1,49 @@
+<div class="example-container">
+    <h2>Bugs</h2>
+    <mat-slide-toggle (change)="showBugUpload = !showBugUpload"></mat-slide-toggle>
+    <button mat-stroked-button color="primary" (click)="parseBugList()">upload bugs</button>
+    <button mat-stroked-button color="primary" (click)="addItem(bug)">add bug</button>
+    <button mat-stroked-button color="primary" (click)="copyBugList()">copy bugs</button>
+
+    <div *ngIf="showBugUpload">
+        <mat-form-field appearance="outline" style="width: 100%">
+            <textarea matInput placeholder="Bug list" [(ngModel)]="bugUpload"></textarea>
+        </mat-form-field>
+    </div>
+
+    <div cdkDropList #bugList="cdkDropList" [cdkDropListData]="bug" [cdkDropListConnectedTo]="[featureList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of bug; let i = index" [attr.data-index]="i" cdkDrag>
+            <mat-form-field style="width: 100%">
+                <input matInput type="text" value="{{item}}" (change)="updateList($event.target.value, i)">
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<div class="example-container">
+    <h2>Features</h2>
+    <mat-slide-toggle (change)="showFeatureUpload = !showFeatureUpload"></mat-slide-toggle>
+    <button mat-stroked-button color="primary" (click)="parseFeatureList()">upload features</button>
+    <button mat-stroked-button color="primary" (click)="addItem(feature)">add feature</button>
+    <button mat-stroked-button color="primary" (click)="copyFeatureList()">copy features</button>
+
+    <div *ngIf="showFeatureUpload">
+            <mat-form-field appearance="outline" style="width: 100%">
+                <textarea matInput placeholder="Feature list" [(ngModel)]="featureUpload"></textarea>
+            </mat-form-field>
+        </div>
+
+    <div cdkDropList #featureList="cdkDropList" [cdkDropListData]="feature" [cdkDropListConnectedTo]="[bugList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of feature; let i = index" [attr.data-index]="i" cdkDrag>
+            <mat-form-field style="width: 100%">
+
+                <input matInput type="text" value="{{item}}" (change)="updateList($event.target.value, i)">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="feature.splice(i, 1)">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
