@@ -4,13 +4,9 @@ import { ListArrangerComponent } from './list-arranger/list-arranger.component';
 
 
 const routes: Routes = [
-  {
-    path: 'ListArranger',
-    component: ListArrangerComponent
-  },
   { path: '',
-    redirectTo: '/ListArranger',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    component: ListArrangerComponent
   },
   { path: '**', component: ListArrangerComponent }
 ];
