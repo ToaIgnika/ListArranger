@@ -11,9 +11,12 @@ export class ListArrangerComponent implements OnInit {
 
   bug = [];
   bugUpload: '';
+  showBugUpload = false;
 
   feature = [];
   featureUpload: '';
+  showFeatureUpload = false;
+  
   constructor() { }
 
   drop(event: CdkDragDrop<string[]>) {
